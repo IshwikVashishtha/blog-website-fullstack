@@ -1,0 +1,73 @@
+{% from "bootstrap5/form.html" import render_form %} 
+{% block content %}
+{% include "header.html" %}
+
+<!-- Page Header -->
+<header
+  class="masthead"
+  style="
+    background-image: url('{{ url_for('static', filename='assets/img/register-bg.jpg') }}');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 6rem 0;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  "
+>
+  <div class="container position-relative">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="page-heading">
+          <h1 style="font-family: 'Lora', serif; font-weight: 700;">Register</h1>
+          <span
+            class="subheading"
+            style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: 1.2rem;"
+            >Start Contributing to the Blog!</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="container my-5">
+  <div class="row justify-content-center">
+    <!-- Registration Form -->
+    <div class="col-lg-6 col-md-8">
+      <div
+        class="card shadow-lg p-4"
+        style="
+          border-radius: 10px;
+          background: #fff;
+          border: none;
+        "
+      >
+        <h2
+          class="text-center"
+          style="font-family: 'Lora', serif; font-size: 1.5rem; margin-bottom: 1rem;"
+        >
+          Create Your Account
+        </h2>
+        <p
+          class="text-center"
+          style="font-family: 'Open Sans', sans-serif; color: #555; font-size: 1rem;"
+        >
+          Fill out the form below to join us.
+        </p>
+        {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+        <p
+          class="text-center mt-4"
+          style="font-family: 'Open Sans', sans-serif; font-size: 0.9rem;"
+        >
+          Already have an account?
+          <a href="{{ url_for('login') }}" style="color: #007bff;">Log in here</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% include "footer.html" %}
+{% endblock %}

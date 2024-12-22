@@ -1,0 +1,67 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% block content %}
+{% include "header.html" %}
+
+<!-- Page Header -->
+<header
+  class="masthead"
+  style="
+    background-image: url('{{ url_for('static', filename='assets/img/edit-bg.jpg') }}');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 6rem 0;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  "
+>
+  <div class="container position-relative">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="page-heading">
+          {% if is_edit %}
+          <h1 style="font-family: 'Lora', serif; font-weight: 700;">Edit Post</h1>
+          {% else %}
+          <h1 style="font-family: 'Lora', serif; font-weight: 700;">New Post</h1>
+          {% endif %}
+          <span
+            class="subheading"
+            style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: 1.2rem;"
+            >You're going to make a great blog post!</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <!-- CKEditor Loading -->
+      {{ ckeditor.load() }}
+      {{ ckeditor.config(name="body") }}
+
+      <!-- Form -->
+      <div
+        class="card shadow-lg p-4"
+        style="border-radius: 10px; background: #fff;"
+      >
+        <h2
+          style="font-family: 'Lora', serif; font-size: 1.5rem; margin-bottom: 1rem; text-align: center;"
+        >
+          {% if is_edit %}
+          Update Your Post
+          {% else %}
+          Create a New Post
+          {% endif %}
+        </h2>
+        {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+      </div>
+    </div>
+  </div>
+</main>
+
+{% include "footer.html" %}
+{% endblock %}

@@ -1,0 +1,93 @@
+{% include "header.html" %}
+
+<!-- Page Header -->
+<header
+  class="masthead"
+  style="background-image: url('{{ url_for('static', filename='assets/img/home-bg.jpg') }}'); background-size: cover; background-position: center;"
+>
+  <div class="container position-relative px-4 px-lg-5 text-center text-light">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1 style="font-family: 'Lora', serif;">Ishwik's Blog</h1>
+          <span
+            class="subheading"
+            style="font-family: 'Open Sans', sans-serif; font-weight: 300;"
+            >A collection of random musings.</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container px-4 px-lg-5 my-5">
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+      <!-- Post Preview -->
+      {% for post in all_posts %}
+      <div class="post-preview mb-5">
+        <a
+          href="{{ url_for('show_post', post_id=post.id) }}"
+          style="text-decoration: none; color: inherit;"
+        >
+          <h2 class="post-title" style="font-family: 'Lora', serif; font-weight: 700;">
+            {{ post.title }}
+          </h2>
+          <h3
+            class="post-subtitle"
+            style="font-family: 'Open Sans', sans-serif; font-weight: 400; color: #555;"
+          >
+            {{ post.subtitle }}
+          </h3>
+        </a>
+        <p
+          class="post-meta mt-3"
+          style="font-family: 'Open Sans', sans-serif; font-size: 0.9rem; color: #777;"
+        >
+          Posted by
+          <a href="#" style="color: #007bff; text-decoration: none;"
+            >{{ post.author.name }}</a
+          >
+          on {{ post.date }}
+          {% if current_user.id == 4 %}
+          <a
+            href="{{ url_for('delete_post', post_id=post.id) }}"
+            style="color: #dc3545; text-decoration: none; margin-left: 10px;"
+            >✘</a
+          >
+          {% endif %}
+        </p>
+      </div>
+      <hr class="my-4" />
+      {% endfor %}
+
+      <!-- New Post Button -->
+      {% if current_user.is_authenticated %}
+      <div class="d-flex justify-content-end mb-4">
+        <a
+          class="btn btn-primary"
+          href="{{ url_for('add_new_post') }}"
+          style="font-family: 'Open Sans', sans-serif;"
+        >
+          Create New Post
+        </a>
+      </div>
+      {% endif %}
+
+      <!-- Pager -->
+      <div class="d-flex justify-content-end mb-4">
+        <a
+          class="btn btn-secondary"
+          href="#!"
+          style="font-family: 'Open Sans', sans-serif;"
+        >
+          Older Posts →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include "footer.html" %}
