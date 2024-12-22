@@ -51,12 +51,11 @@
             >{{ post.author.name }}</a
           >
           on {{ post.date }}
-          {% if current_user.id == 4 %}
+          {% if current_user.id == 1 %}
           <a
             href="{{ url_for('delete_post', post_id=post.id) }}"
             style="color: #dc3545; text-decoration: none; margin-left: 10px;"
-            >✘</a
-          >
+            >✘</a>
           {% endif %}
         </p>
       </div>
